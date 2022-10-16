@@ -1,4 +1,4 @@
-import { ProductCategoryModel } from "../model/product_categories.model";
+import { ProductMaterialModel } from "../model/product_materials.model"; 
 import {
   GenericServiceErrorResponse,
   GenericServiceResponse,
@@ -12,60 +12,61 @@ import {
 } from "../../utils/methods/httpResponses";
 import { Request, Response } from "express";
 
-const productCategoryModel = ProductCategoryModel;
+const productMaterialModel = ProductMaterialModel;
 
-export async function getProductCategories(
+export async function getProductMaterials(
   req: any,
   res: Response<GenericServiceResponse | GenericServiceErrorResponse>
 ) {
   try {
-    const productCategories = await productCategoryModel.findAll({
-      attributes: ["id_product_category", "product_category_name"],
+    const productMaterials = await productMaterialModel.findAll({
+      attributes: ["id_product_material", "product_material_name"],
     });
-    if (productCategories) {
-      if (productCategories.length === 0) {
+
+    if (productMaterials) {
+      if (productMaterials.length === 0) {
         res
           .status(200)
           .json(
             status200Ok(
               [],
-              "product_categories",
+              "product_materials",
               "Resource found but has not content"
             )
           );
       } else {
         res
           .status(200)
-          .json(status200Ok(productCategories, "productCategories"));
+          .json(status200Ok(productMaterials, "productMaterials"));
       }
     } else {
-      res.status(404).json(status404NotFound("productCategories"));
+      res.status(404).json(status404NotFound("productMaterials"));
     }
   } catch (error) {
     res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
-export async function postProductCategory(
-  req: Request,
+export async function postProductMaterial(
+  req: any,
   res: Response<GenericServiceResponse | GenericServiceErrorResponse>
 ) {
-  const { product_category_name } = req.body;
+  const { product_material_name } = req.body;
 
-  if (!product_category_name || typeof product_category_name != "string") {
+  if (!product_material_name || typeof product_material_name != "string") {
     res
       .status(400)
       .json(
-        status400BadRequest("Invalid value of product_category_name field")
+        status400BadRequest("Invalid value of product_material_name field")
       );
   } else {
     try {
-      const newProductCategory = await productCategoryModel.create({
-        product_category_name,
+      const newProductMaterial = await productMaterialModel.create({
+        product_material_name,
       });
       res
         .status(201)
-        .json(status201Created(newProductCategory, "product_category"));
+        .json(status201Created(newProductMaterial, "product_material"));
     } catch (error) {
       res.status(500).json(status500InternalServerError(`${error}`));
     }

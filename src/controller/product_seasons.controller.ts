@@ -1,4 +1,4 @@
-import { ProductCategoryModel } from "../model/product_categories.model";
+import { ProductSeasonModel } from "../model/product_seasons.model"; 
 import {
   GenericServiceErrorResponse,
   GenericServiceResponse,
@@ -12,60 +12,61 @@ import {
 } from "../../utils/methods/httpResponses";
 import { Request, Response } from "express";
 
-const productCategoryModel = ProductCategoryModel;
+const productSeasonModel = ProductSeasonModel;
 
-export async function getProductCategories(
+export async function getProductSeasons(
   req: any,
   res: Response<GenericServiceResponse | GenericServiceErrorResponse>
 ) {
   try {
-    const productCategories = await productCategoryModel.findAll({
-      attributes: ["id_product_category", "product_category_name"],
+    const productSeasons = await productSeasonModel.findAll({
+      attributes: ["id_product_season", "product_season_name"],
     });
-    if (productCategories) {
-      if (productCategories.length === 0) {
+
+    if (productSeasons) {
+      if (productSeasons.length === 0) {
         res
           .status(200)
           .json(
             status200Ok(
               [],
-              "product_categories",
+              "product_seasons",
               "Resource found but has not content"
             )
           );
       } else {
         res
           .status(200)
-          .json(status200Ok(productCategories, "productCategories"));
+          .json(status200Ok(productSeasons, "productSeasons"));
       }
     } else {
-      res.status(404).json(status404NotFound("productCategories"));
+      res.status(404).json(status404NotFound("productSeasons"));
     }
   } catch (error) {
     res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
-export async function postProductCategory(
-  req: Request,
+export async function postProductSeason(
+  req: any,
   res: Response<GenericServiceResponse | GenericServiceErrorResponse>
 ) {
-  const { product_category_name } = req.body;
+  const { product_season_name } = req.body;
 
-  if (!product_category_name || typeof product_category_name != "string") {
+  if (!product_season_name || typeof product_season_name != "string") {
     res
       .status(400)
       .json(
-        status400BadRequest("Invalid value of product_category_name field")
+        status400BadRequest("Invalid value of product_season_name field")
       );
   } else {
     try {
-      const newProductCategory = await productCategoryModel.create({
-        product_category_name,
+      const newProductSeason = await productSeasonModel.create({
+        product_season_name,
       });
       res
         .status(201)
-        .json(status201Created(newProductCategory, "product_category"));
+        .json(status201Created(newProductSeason, "product_collection"));
     } catch (error) {
       res.status(500).json(status500InternalServerError(`${error}`));
     }

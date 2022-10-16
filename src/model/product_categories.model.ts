@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../db/dbConnection'
-// import { sequelize } from '../app'
 
 export const ProductCategoryModel = sequelize.define(
   "product_categories", {
