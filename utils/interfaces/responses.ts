@@ -18,5 +18,5 @@ export interface GenericServiceResponse{
 export interface GenericServiceErrorResponse{
   httpStatus: Number,
   serverMessage: String,
-  errorMessage: String | undefined,
+  errorMessage?: String | Array<any>,
 }

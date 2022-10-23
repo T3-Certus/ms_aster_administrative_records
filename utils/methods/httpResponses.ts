@@ -34,7 +34,7 @@ export const status201Created = (responseBody: any, resourceCreated?: String, de
   }
 }
 
-export const status400BadRequest = (motiveBadRequest?: String, detailMessage?: String): GenericServiceErrorResponse =>{
+export const status400BadRequest = (motiveBadRequest?: String, detailMessage?: String | Array<any>): GenericServiceErrorResponse =>{
   if(!motiveBadRequest || motiveBadRequest.length === 0){
     return {
       httpStatus: 400,

@@ -66,7 +66,7 @@ export async function postProductSeason(
       });
       res
         .status(201)
-        .json(status201Created(newProductSeason, "product_collection"));
+        .json(status201Created(newProductSeason, "product_season"));
     } catch (error) {
       res.status(500).json(status500InternalServerError(`${error}`));
     }
