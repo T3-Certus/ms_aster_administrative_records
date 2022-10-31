@@ -11,7 +11,6 @@ import {
   status500InternalServerError,
 } from "../../utils/methods/httpResponses";
 import { Request, Response } from "express";
-import { Interface } from "readline";
 
 const globalProductModel = GlobalProductModel;
 
@@ -79,7 +78,7 @@ export async function postGlobalProduct(
     res.status(201).json(status201Created(newGlobalProduct, "global_product"))
   } catch (error) {
     res.status(500).json(status500InternalServerError(`${error}`));
-    
+
   }
 
 }

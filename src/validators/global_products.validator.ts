@@ -1,6 +1,4 @@
-import { Response } from "express";
 import { check } from "express-validator";
-import { GenericServiceErrorResponse } from "../../utils/interfaces";
 import {validateCreateRequest} from "../../utils/methods/validateHelpers"
 
 export const postGlobalProductValidator = [
