@@ -23,7 +23,8 @@ if(!process.env.APP_PORT){
 
 const PORT: number = parseInt(process.env.APP_PORT as string, 10)
 
-const port = 3000 | PORT 
+// const port = 3000 | PORT 
+const port = 3001
 
 // routes
 
