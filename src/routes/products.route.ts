@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getGlobalProducts, postGlobalProduct } from "../controller/global_products.controller";
-import { getIndividualProducts, postIndividualProduct } from "../controller/individual_products.controller";
+import { getGlobalProducts, postGlobalProduct, putGlobalProduct } from "../controller/global_products.controller";
+import { getIndividualProducts, postIndividualProduct, putIndividualProduct } from "../controller/individual_products.controller";
 import {
   getProductCategories,
   postProductCategory,
@@ -44,8 +44,10 @@ router.post("/colors", postProductColor)
 
 router.get("/globals", getGlobalProducts)
 router.post("/globals", postGlobalProductValidator, postGlobalProduct)
+router.put("/globals/:id", putGlobalProduct)
 
 router.get("/individuals", getIndividualProducts)
 router.post("/individuals", postIndividualProductValidator, postIndividualProduct)
+router.put("/individuals/:id", putIndividualProduct)
 
 export default router;

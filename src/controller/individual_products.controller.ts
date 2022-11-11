@@ -37,7 +37,7 @@ export async function getIndividualProducts(
     if (individualProducts) {
       if (individualProducts.length < 1) {
         res
-          .status(200)
+          .status(204)
           .json(
             status200Ok(
               [],
@@ -86,8 +86,55 @@ export async function postIndividualProduct(
       has_offer,
       percent_discount,
     });
-		res.status(201).json(status201Created(newIndividualProduct, "individual_product"))
+    res
+      .status(201)
+      .json(status201Created(newIndividualProduct, "individual_product"));
   } catch (error) {
-		res.status(500).json(status500InternalServerError(`${error}`))
-	}
+    res.status(500).json(status500InternalServerError(`${error}`));
+  }
+}
+
+export async function putIndividualProduct(
+  req: any,
+  res: Response<GenericServiceResponse | GenericServiceErrorResponse>
+) {
+  
+  const {
+    id_global_product,
+    id_product_size,
+    id_product_color,
+    product_stock,
+    product_price,
+    product_sku,
+    product_url_img,
+    has_offer,
+    percent_discount,
+  } = req.body;
+
+  const {id} = req.params;
+  console.log(id);
+
+  try {
+    const editedIndividualProduct = await IndividualProductModel.update(
+      {
+        id_global_product,
+        id_product_size,
+        id_product_color,
+        product_stock,
+        product_price,
+        product_sku,
+        product_url_img,
+        has_offer,
+        percent_discount,
+      },
+      { where: { id_individual_product: id } }
+    );
+    res
+      .status(200)
+      .json(
+        status200Ok(editedIndividualProduct, "individual_product", "", true)
+      );
+  } catch (error) {
+    res.status(500).json(status500InternalServerError(`${error}`));
+  }
 }

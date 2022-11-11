@@ -1,17 +1,17 @@
 import {GenericServiceResponse, GenericServiceErrorResponse} from '../interfaces'
 
-export const status200Ok = (responseBody: any, resourceFound?: String, detailMessage?: String): GenericServiceResponse => {
+export const status200Ok = (responseBody: any, resourceFound?: String, detailMessage?: String, isPut = false): GenericServiceResponse => {
   if(!resourceFound || resourceFound.length === 0){
     return {
-      httpStatus: 200,
-      serverMessage: 'Resource found',
+      httpStatus: 204,
+      serverMessage: !isPut ? 'Resource found' : 'Resource updated',
       moreDetails: { responseMessage: detailMessage },
       responseBody: responseBody
     }
   }
   return {
     httpStatus: 200,
-    serverMessage: `Resource ${resourceFound} found`,
+    serverMessage: !isPut ? `Resource ${resourceFound} found` : `Resource ${resourceFound} updated`,
     moreDetails: { responseMessage: detailMessage },
     responseBody: responseBody
   }

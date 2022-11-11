@@ -26,7 +26,7 @@ export async function getProductSizes(
     if (productSizes) {
       if (productSizes.length === 0) {
         res
-          .status(200)
+          .status(204)
           .json(
             status200Ok(
               [],

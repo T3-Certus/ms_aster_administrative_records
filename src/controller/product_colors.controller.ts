@@ -22,7 +22,7 @@ export async function getProductColors(req: any, res: Response<GenericServiceRes
 
     if(productColors){
       if(productColors.length === 0 ){
-        res.status(200).json(status200Ok([], "product_colors", "Resource found but has not content"))
+        res.status(204).json(status200Ok([], "product_colors", "Resource found but has not content"))
       }else{
         res.status(200).json(status200Ok(productColors, "product_colors"))
       }
