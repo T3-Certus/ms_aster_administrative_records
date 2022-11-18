@@ -2,17 +2,19 @@ import { ProductColorModel } from "../model/product_colors.model";
 import {
   GenericServiceErrorResponse,
   GenericServiceResponse,
-} from "../../utils/interfaces/responses";
+} from "../utils/interfaces/responses";
 import {
   status200Ok,
   status201Created,
   status400BadRequest,
   status404NotFound,
   status500InternalServerError,
-} from "../../utils/methods/httpResponses";
+} from "../utils/methods/httpResponses";
 import { Request, Response } from "express";
+import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
 
 const productColorModel = ProductColorModel
+const resourceName = "product_colors"
 
 export async function getProductColors(req: any, res: Response<GenericServiceResponse | GenericServiceErrorResponse>){
   try {
@@ -20,15 +22,7 @@ export async function getProductColors(req: any, res: Response<GenericServiceRes
       attributes: ["id_product_color", "product_color_name"]
     })
 
-    if(productColors){
-      if(productColors.length === 0 ){
-        res.status(204).json(status200Ok([], "product_colors", "Resource found but has not content"))
-      }else{
-        res.status(200).json(status200Ok(productColors, "product_colors"))
-      }
-    }else{
-      res.status(404).json(status404NotFound("product_colors"))
-    }
+    getGenericResponseHelper(productColors, resourceName, res)
   } catch (error) {
     res.status(500).json(status500InternalServerError(`${error}`))
   }

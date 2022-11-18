@@ -2,17 +2,19 @@ import { ProductSeasonModel } from "../model/product_seasons.model";
 import {
   GenericServiceErrorResponse,
   GenericServiceResponse,
-} from "../../utils/interfaces/responses";
+} from "../utils/interfaces/responses";
 import {
   status200Ok,
   status201Created,
   status400BadRequest,
   status404NotFound,
   status500InternalServerError,
-} from "../../utils/methods/httpResponses";
+} from "../utils/methods/httpResponses";
 import { Request, Response } from "express";
+import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
 
 const productSeasonModel = ProductSeasonModel;
+const resourceName = "product_seasons"
 
 export async function getProductSeasons(
   req: any,
@@ -23,25 +25,7 @@ export async function getProductSeasons(
       attributes: ["id_product_season", "product_season_name"],
     });
 
-    if (productSeasons) {
-      if (productSeasons.length === 0) {
-        res
-          .status(204)
-          .json(
-            status200Ok(
-              [],
-              "product_seasons",
-              "Resource found but has not content"
-            )
-          );
-      } else {
-        res
-          .status(200)
-          .json(status200Ok(productSeasons, "productSeasons"));
-      }
-    } else {
-      res.status(404).json(status404NotFound("productSeasons"));
-    }
+    getGenericResponseHelper(productSeasons, resourceName, res)
   } catch (error) {
     res.status(500).json(status500InternalServerError(`${error}`));
   }

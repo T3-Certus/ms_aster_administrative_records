@@ -5,10 +5,5 @@ services:
     container_name: ms_administrative_records
     build: .
     ports:
+      - "3000:3000"
       - "3001:3001"
-    environment:
-      - POSTGRESQL_DB_HOST=cluster-db.czsbrlhzgr1u.sa-east-1.rds.amazonaws.com
-      - POSTGRESQL_DB_USER=postgres
-      - POSTGRESQL_DB_PASSWORD=8RG0EkcBbWMFbqDJ6mbMVA
-      - POSTGRESQL_DB=postgres
-      - POSTGRESQL_DB_SCHEMA=asterisks_prod

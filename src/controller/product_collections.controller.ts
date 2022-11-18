@@ -2,17 +2,19 @@ import { ProductCollectionModel } from "../model/product_collections.model";
 import {
   GenericServiceErrorResponse,
   GenericServiceResponse,
-} from "../../utils/interfaces/responses";
+} from "../utils/interfaces/responses";
 import {
   status200Ok,
   status201Created,
   status400BadRequest,
   status404NotFound,
   status500InternalServerError,
-} from "../../utils/methods/httpResponses";
+} from "../utils/methods/httpResponses";
 import { Request, Response } from "express";
+import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
 
 const productCollectionModel = ProductCollectionModel;
+const resourceName = "product_collections"
 
 export async function getProductCollections(
   req: any,
@@ -23,25 +25,7 @@ export async function getProductCollections(
       attributes: ["id_product_collection", "product_collection_name"],
     });
 
-    if (productCollections) {
-      if (productCollections.length === 0) {
-        res
-          .status(204)
-          .json(
-            status200Ok(
-              [],
-              "product_collections",
-              "Resource found but has not content"
-            )
-          );
-      } else {
-        res
-          .status(200)
-          .json(status200Ok(productCollections, "productCollections"));
-      }
-    } else {
-      res.status(404).json(status404NotFound("productCollections"));
-    }
+    getGenericResponseHelper(productCollections, resourceName, res)
   } catch (error) {
     res.status(500).json(status500InternalServerError(`${error}`));
   }

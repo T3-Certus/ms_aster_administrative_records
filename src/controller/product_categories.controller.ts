@@ -2,17 +2,19 @@ import { ProductCategoryModel } from "../model/product_categories.model";
 import {
   GenericServiceErrorResponse,
   GenericServiceResponse,
-} from "../../utils/interfaces/responses";
+} from "../utils/interfaces/responses";
 import {
   status200Ok,
   status201Created,
   status400BadRequest,
   status404NotFound,
   status500InternalServerError,
-} from "../../utils/methods/httpResponses";
+} from "../utils/methods/httpResponses";
 import { Request, Response } from "express";
+import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
 
 const productCategoryModel = ProductCategoryModel;
+const resourceName = "product_categories"
 
 export async function getProductCategories(
   req: any,
@@ -22,25 +24,8 @@ export async function getProductCategories(
     const productCategories = await productCategoryModel.findAll({
       attributes: ["id_product_category", "product_category_name"],
     });
-    if (productCategories) {
-      if (productCategories.length === 0) {
-        res
-          .status(204)
-          .json(
-            status200Ok(
-              [],
-              "product_categories",
-              "Resource found but has not content"
-            )
-          );
-      } else {
-        res
-          .status(200)
-          .json(status200Ok(productCategories, "productCategories"));
-      }
-    } else {
-      res.status(404).json(status404NotFound("productCategories"));
-    }
+    
+    getGenericResponseHelper(productCategories, resourceName, res)
   } catch (error) {
     res.status(500).json(status500InternalServerError(`${error}`));
   }

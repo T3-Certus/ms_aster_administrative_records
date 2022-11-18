@@ -1,6 +1,15 @@
 import { Router } from "express";
-const usersRouter = Router()
+import { getUserAddresses, getUserCarts, getUserData, getUserRoles, postUserRole } from "../controller";
+const router = Router()
 
-usersRouter.get('/demo', (req, res) => res.send("demoooo users") )
+router.get('/roles', getUserRoles)
+router.post('/roles', postUserRole)
 
-export default usersRouter 
+router.get('/data', getUserData)
+
+router.get('/carts', getUserCarts)
+router.get('/carts/:id', getUserCarts)
+
+router.get('/addresses', getUserAddresses)
+
+export default router 

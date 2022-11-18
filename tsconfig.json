@@ -1,18 +1,6 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    // "module": "ESNext",
-    //   "esModuleInterop": true,
-    //   "target": "ESNext",
-    //   "moduleResolution": "Node",
-    //   "outDir": "dist",
-    //   "forceConsistentCasingInFileNames": true,
-    //   "noFallthroughCasesInSwitch": true,
-    //   "isolatedModules": false,
-    //   "strict": true,
-    //   "noImplicitAny": true,
-    //   "useUnknownInCatchVariables": false,
-    //   "inlineSourceMap": true
     "lib": ["ES2022"], // ES2020 in earlier versions
     "module": "ES2022", //ESNext 
     "moduleResolution": "Node",

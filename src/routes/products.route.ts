@@ -1,24 +1,25 @@
 import { Router } from "express";
-import { getGlobalProducts, postGlobalProduct, putGlobalProduct } from "../controller/global_products.controller";
-import { getIndividualProducts, postIndividualProduct, putIndividualProduct } from "../controller/individual_products.controller";
 import {
+  getGlobalProducts,
+  getIndividualProducts,
   getProductCategories,
-  postProductCategory,
-} from "../controller/product_categories.controller";
-import {
   getProductCollections,
-  postProductCollection,
-} from "../controller/product_collections.controller";
-import { getProductColors, postProductColor } from "../controller/product_colors.controller";
-import {
+  getProductColors,
   getProductMaterials,
-  postProductMaterial,
-} from "../controller/product_materials.controller";
-import {
   getProductSeasons,
+  getProductSizes,
+  postGlobalProduct,
+  postIndividualProduct,
+  postProductCategory,
+  postProductCollection,
+  postProductColor,
+  postProductMaterial,
   postProductSeason,
-} from "../controller/product_seasons.controller";
-import { getProductSizes, postProductSize } from "../controller/product_sizes.controller";
+  postProductSize,
+  putGlobalProduct,
+  putIndividualProduct,
+} from "../controller";
+
 import { postGlobalProductValidator } from "../validators/global_products.validator";
 import { postIndividualProductValidator } from "../validators/individual_products.validator";
 
@@ -36,18 +37,22 @@ router.post("/materials", postProductMaterial);
 router.get("/seasons", getProductSeasons);
 router.post("/seasons", postProductSeason);
 
-router.get("/sizes", getProductSizes)
-router.post("/sizes", postProductSize)
+router.get("/sizes", getProductSizes);
+router.post("/sizes", postProductSize);
 
-router.get("/colors", getProductColors)
-router.post("/colors", postProductColor)
+router.get("/colors", getProductColors);
+router.post("/colors", postProductColor);
 
-router.get("/globals", getGlobalProducts)
-router.post("/globals", postGlobalProductValidator, postGlobalProduct)
-router.put("/globals/:id", putGlobalProduct)
+router.get("/globals", getGlobalProducts);
+router.post("/globals", postGlobalProductValidator, postGlobalProduct);
+router.put("/globals/:id", putGlobalProduct);
 
-router.get("/individuals", getIndividualProducts)
-router.post("/individuals", postIndividualProductValidator, postIndividualProduct)
-router.put("/individuals/:id", putIndividualProduct)
+router.get("/individuals", getIndividualProducts);
+router.post(
+  "/individuals",
+  postIndividualProductValidator,
+  postIndividualProduct
+);
+router.put("/individuals/:id", putIndividualProduct);
 
 export default router;

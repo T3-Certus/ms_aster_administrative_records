@@ -19,7 +19,7 @@ export const IndividualProductModel = sequelize.define(
     //   type: DataTypes.STRING
     // },
     product_price: {
-      type: DataTypes.DECIMAL
+      type: DataTypes.INTEGER
     },
     product_sku:{
       type: DataTypes.STRING

@@ -1,5 +1,5 @@
 import { check } from "express-validator";
-import {validateCreateRequest} from "../../utils/methods/validateHelpers"
+import {validateCreateRequest} from "../utils/methods/validateHelpers"
 
 export const postGlobalProductValidator = [
   check('id_product_collection').exists().notEmpty().isInt(),

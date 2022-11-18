@@ -1,0 +1,53 @@
+import { UserRoleModel } from "../model";
+import {
+  GenericServiceErrorResponse,
+  GenericServiceResponse,
+} from "../utils/interfaces/responses";
+import {
+  status200Ok,
+  status201Created,
+  status400BadRequest,
+  status404NotFound,
+  status500InternalServerError,
+} from "../utils/methods/httpResponses";
+import { Request, Response } from "express";
+import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
+
+const model = UserRoleModel;
+
+const resourceName = "user_roles";
+
+export async function getUserRoles(
+  req: any,
+  res: Response<GenericServiceResponse | GenericServiceErrorResponse>
+) {
+  try {
+    const userRoles = await model.findAll({
+      attributes: ["id_user_rol", "user_rol_name"],
+    });
+
+    getGenericResponseHelper(userRoles, resourceName, res);
+  } catch (error) {
+    res.status(500).json(status500InternalServerError(`${error}`));
+  }
+}
+
+export async function postUserRole(
+  req: any,
+  res: Response<GenericServiceResponse | GenericServiceErrorResponse>
+) {
+  const { user_rol_name } = req.body;
+
+  if (!user_rol_name || typeof user_rol_name != "string") {
+    res
+      .status(400)
+      .json(status400BadRequest("Invalid value of user_rol_name field"));
+  } else {
+    try {
+      const newUserRole = await model.create({ user_rol_name });
+      res.status(201).json(status201Created(newUserRole, resourceName));
+    } catch (error) {
+      res.status(500).json(status500InternalServerError(`${error}`));
+    }
+  }
+}

@@ -3,7 +3,7 @@ import {GenericServiceResponse, GenericServiceErrorResponse} from '../interfaces
 export const status200Ok = (responseBody: any, resourceFound?: String, detailMessage?: String, isPut = false): GenericServiceResponse => {
   if(!resourceFound || resourceFound.length === 0){
     return {
-      httpStatus: 204,
+      httpStatus: 202,
       serverMessage: !isPut ? 'Resource found' : 'Resource updated',
       moreDetails: { responseMessage: detailMessage },
       responseBody: responseBody

@@ -13,5 +13,4 @@ export function requestGetParamsValidator(query: any, comparationAttributes: str
   return paramsAttributes
 
   // console.log(destinyObject)
-
 }
