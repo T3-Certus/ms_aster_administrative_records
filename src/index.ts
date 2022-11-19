@@ -4,6 +4,8 @@ import { app, port } from "./app";
 
 async function main() {
   
+  const host = '0.0.0.0'
+
   await sequelize
     .sync({ force: false })
     .then(() => console.log("Connected with the database"))
@@ -12,8 +14,8 @@ async function main() {
       process.exit();
     });
 
-  app.listen(port, '0.0.0.0', () => {
-    console.log(`Server running at ${port} port`);
+  app.listen(port, host, () => {
+    console.log(`Server running at ${host}:${port}`);
   });
 }
 
