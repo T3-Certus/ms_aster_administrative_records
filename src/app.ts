@@ -25,15 +25,15 @@ if(!process.env.APP_PORT){
 
 const PORT: number = parseInt(process.env.APP_PORT as string, 10)
 
-const port = 3000 | PORT 
+const port = 3000 || PORT 
 // const port = 3001
 
 // routes
 
-app.get('/ms-administrative-records/v1', (req, res) => res.send('MS administrative records'))
-app.use('/ms-administrative-records/v1/products', productRouter)
-app.use('/ms-administrative-records/v1/users', userRouter)
-app.use('/ms-administrative-records/v1/orders', orderRouter)
-
+// app.get('/ms-administrative-records/v1', (req, res) => res.send('MS administrative records'))
+app.get('/', (req, res) => res.send('MS administrative records'))
+app.use('/v1/products', productRouter)
+app.use('/v1/users', userRouter)
+app.use('/v1/orders', orderRouter)
 
 export {app, port}
