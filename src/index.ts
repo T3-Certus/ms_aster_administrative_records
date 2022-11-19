@@ -12,7 +12,7 @@ async function main() {
       process.exit();
     });
 
-  app.listen(port, () => {
+  app.listen(port, '0.0.0.0', () => {
     console.log(`Server running at ${port} port`);
   });
 }
