@@ -23,7 +23,7 @@ if(!process.env.APP_PORT){
   process.exit(1)
 }
 
-const PORT: number = parseInt(process.env.APP_PORT as string, 10)
+const PORT: number = parseInt(process.env.PORT as string, 10)
 
 const port = PORT || 3000 
 // const port = 3001
