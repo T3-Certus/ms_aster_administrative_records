@@ -11,22 +11,21 @@ const app = express();
 
 // midlewares
 
-// app.use(helmet())
-// app.use(cors())
+app.use(helmet())
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 app.use(morgan('dev'))
 
 dotenv.config()
 
-if(!process.env.APP_PORT){
+if(!process.env.PORT){
   process.exit(1)
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10)
 
 const port = PORT || 3000 
-// const port = 3001
 
 // routes
 
