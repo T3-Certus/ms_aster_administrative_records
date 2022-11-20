@@ -26,6 +26,9 @@ export const UserDataModel = sequelize.define(
     },
     user_email:{
       type: DataTypes.STRING
+    },
+    user_password: {
+      type: DataTypes.STRING
     }
   },
   {
