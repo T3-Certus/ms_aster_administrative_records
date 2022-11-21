@@ -51,3 +51,29 @@ export async function postUserRole(
     }
   }
 }
+
+export async function putUserRole(
+  req: any,
+  res: Response<GenericServiceResponse | GenericServiceErrorResponse>
+) {
+  const { user_rol_name } = req.body;
+  const { id } = req.params;
+
+  if (!user_rol_name || typeof user_rol_name != "string") {
+    res
+      .status(400)
+      .json(status400BadRequest("Invalid value of user_rol_name field"));
+  } else {
+    try {
+      const updatedUserRoles = await model.update(
+        { user_rol_name },
+        { where: { id_user_rol: id } }
+      );
+      res
+        .status(200)
+        .json(status200Ok(updatedUserRoles, resourceName, "", true));
+    } catch (error) {
+      res.status(500).json(status500InternalServerError(`${error}`));
+    }
+  }
+}
