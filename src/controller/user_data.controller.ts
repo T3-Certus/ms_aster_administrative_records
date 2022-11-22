@@ -46,7 +46,7 @@ export async function getUserData(
         "user_document_number",
         "user_cellphone",
         "user_email",
-      ], include: [{model: UserAddressModel}, {model: UserCartModel}],
+      ],
       where: getValidator(query, attributes),
     });
 
