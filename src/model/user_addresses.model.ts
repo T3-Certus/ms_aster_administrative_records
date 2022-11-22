@@ -3,7 +3,7 @@ import { sequelize } from "../db/dbConnection";
 import { UserDataModel } from "./user_data.model";
 
 export const UserAddressModel = sequelize.define(
-  "uder_addresses", {
+  "user_addresses", {
     id_user_address:{
       type: DataTypes.INTEGER,
       primaryKey: true,
