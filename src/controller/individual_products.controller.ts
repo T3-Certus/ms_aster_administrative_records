@@ -12,21 +12,24 @@ import {
 } from "../utils/methods/httpResponses";
 import { Request, Response } from "express";
 import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
+import { ProductColorModel, ProductSizeModel } from "../model";
 
 const individualProductModel = IndividualProductModel;
-const resourceName = "individual_products"
+const resourceName = "individual_products";
 
 export async function getIndividualProducts(
   req: any,
   res: Response<GenericServiceResponse | GenericServiceErrorResponse>
 ) {
+  const { idGlobal, idIndividual } = req.params;
+
   try {
     const individualProducts = await individualProductModel.findAll({
       attributes: [
         "id_individual_product",
         "id_global_product",
-        "id_product_size",
-        "id_product_color",
+        // "id_product_size",
+        // "id_product_color",
         "product_stock",
         "product_price",
         "product_sku",
@@ -34,9 +37,31 @@ export async function getIndividualProducts(
         "has_offer",
         "percent_discount",
       ],
+      where:
+        idGlobal && idIndividual
+          ? { id_global_product: idGlobal, id_individual_product: idIndividual }
+          : idGlobal && !idIndividual
+          ? { id_global_product: idGlobal }
+          : {},
+      include: [
+        {
+          model: ProductSizeModel,
+          attributes: [
+            ["id_product_size", "id"],
+            ["product_size_name", "name"],
+          ],
+        },
+        {
+          model: ProductColorModel,
+          attributes: [
+            ["id_product_color", "id"],
+            ["product_color_name", "name"],
+          ],
+        },
+      ],
     });
 
-    getGenericResponseHelper(individualProducts, resourceName, res)
+    getGenericResponseHelper(individualProducts, resourceName, res);
   } catch (error) {
     res.status(500).json(status500InternalServerError(`${error}`));
   }
@@ -82,7 +107,6 @@ export async function putIndividualProduct(
   req: any,
   res: Response<GenericServiceResponse | GenericServiceErrorResponse>
 ) {
-  
   const {
     id_global_product,
     id_product_size,
@@ -95,7 +119,7 @@ export async function putIndividualProduct(
     percent_discount,
   } = req.body;
 
-  const {id} = req.params;
+  const { id } = req.params;
   console.log(id);
 
   try {

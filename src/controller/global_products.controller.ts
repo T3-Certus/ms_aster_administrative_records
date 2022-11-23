@@ -1,6 +1,12 @@
 import {
   GlobalProductModel,
   IndividualProductModel,
+  ProductCategoryModel,
+  ProductCollectionModel,
+  ProductColorModel,
+  ProductMaterialModel,
+  ProductSeasonModel,
+  ProductSizeModel,
 } from "../model";
 import {
   GenericServiceErrorResponse,
@@ -41,14 +47,62 @@ export async function getGlobalProducts(
     const globalProductsData = await globalProductModel.findAll({
       attributes: [
         "id_global_product",
-        "id_product_collection",
-        "id_product_season",
-        "id_product_material",
-        "id_product_category",
+        // "id_product_collection",
+        // "id_product_season",
+        // "id_product_material",
+        // "id_product_category",
         "product_url_code",
         "product_name",
       ],
-      include: { model: IndividualProductModel },
+      include: [
+        {
+          model: IndividualProductModel,
+          include: [
+            {
+              model: ProductSizeModel,
+              attributes: [
+                ["id_product_size", "id"],
+                ["product_size_name", "name"],
+              ],
+            },
+            {
+              model: ProductColorModel,
+              attributes: [
+                ["id_product_color", "id"],
+                ["product_color_name", "name"],
+              ],
+            },
+          ],
+        },
+        {
+          model: ProductCollectionModel,
+          attributes: [
+            ["id_product_collection", "id"],
+            ["product_collection_name", "name"],
+          ],
+        },
+        {
+          model: ProductSeasonModel,
+          attributes: [
+            ["id_product_season", "id"],
+            ["product_season_name", "name"],
+          ],
+        },
+        {
+          model: ProductMaterialModel,
+          attributes: [
+            ["id_product_material", "id"],
+            ["product_material_name", "name"],
+          ],
+        },
+        {
+          model: ProductCategoryModel,
+          attributes: [
+            ["id_product_category", "id"],
+            ["product_category_name", "name"],
+          ],
+        },
+      ],
       where: getValidator(query, attributes),
     });
 
