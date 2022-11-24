@@ -146,3 +146,19 @@ export async function putIndividualProduct(
     res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
+
+export async function deleteIndividualProduct(
+  req: any,
+  res: Response<GenericServiceResponse | GenericServiceErrorResponse>
+) {
+  const {individualProductId} = req.params
+
+  try {
+    const deleteProduct = await individualProductModel.destroy({where: {id_individual_product: individualProductId}})
+
+    res.status(200).json(status200Ok(deleteProduct, "individual_products", "", false, true))
+  } catch (error) {
+    res.status(500).json(status500InternalServerError(`${error}`))
+  }
+
+}

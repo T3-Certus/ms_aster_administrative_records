@@ -176,3 +176,19 @@ export async function putGlobalProduct(
     res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
+
+export async function deleteGlobalProduct(
+  req: any,
+  res: Response<GenericServiceResponse | GenericServiceErrorResponse>
+) {
+  const {globalProductId} = req.params
+
+  try {
+    const deleteProduct = await globalProductModel.destroy({where: {id_global_product: globalProductId}})
+
+    res.status(200).json(status200Ok(deleteProduct, "global_products", "", false, true))
+  } catch (error) {
+    res.status(500).json(status500InternalServerError(`${error}`))
+  }
+
+}

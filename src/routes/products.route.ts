@@ -1,5 +1,7 @@
 import { Router } from "express";
 import {
+  deleteGlobalProduct,
+  deleteIndividualProduct,
   getGlobalProducts,
   getIndividualProducts,
   getProductCategories,
@@ -47,6 +49,7 @@ router.post("/colors", postProductColor);
 router.get("/globals", getGlobalProducts);
 router.post("/globals", postGlobalProductValidator, postGlobalProduct);
 router.put("/globals/:id", postGlobalProductValidator, putGlobalProduct);
+router.delete("/globals/:globalProductId", deleteGlobalProduct);
 
 router.get("/individuals", getIndividualProducts);
 router.get("/individuals/:idGlobal", getIndividualProducts);
@@ -56,6 +59,11 @@ router.post(
   postIndividualProductValidator,
   postIndividualProduct
 );
-router.put("/individuals/:id", postIndividualProductValidator, putIndividualProduct);
+router.put(
+  "/individuals/:id",
+  postIndividualProductValidator,
+  putIndividualProduct
+);
+router.delete("/individuals/:individualProductId", deleteIndividualProduct);
 
 export default router;
