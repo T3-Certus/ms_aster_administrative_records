@@ -19,6 +19,7 @@ import {
   putGlobalProduct,
   putIndividualProduct,
 } from "../controller";
+import { verifyAccessToken } from "../utils/middlewares/verifyAccessToken";
 
 import { postGlobalProductValidator } from "../validators/global_products.validator";
 import { postIndividualProductValidator } from "../validators/individual_products.validator";
@@ -45,7 +46,7 @@ router.post("/colors", postProductColor);
 
 router.get("/globals", getGlobalProducts);
 router.post("/globals", postGlobalProductValidator, postGlobalProduct);
-router.put("/globals/:id", putGlobalProduct);
+router.put("/globals/:id", postGlobalProductValidator, putGlobalProduct);
 
 router.get("/individuals", getIndividualProducts);
 router.get("/individuals/:idGlobal", getIndividualProducts);
@@ -55,6 +56,6 @@ router.post(
   postIndividualProductValidator,
   postIndividualProduct
 );
-router.put("/individuals/:id", putIndividualProduct);
+router.put("/individuals/:id", postIndividualProductValidator, putIndividualProduct);
 
 export default router;
