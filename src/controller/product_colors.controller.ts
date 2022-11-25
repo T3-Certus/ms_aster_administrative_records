@@ -24,7 +24,7 @@ export async function getProductColors(req: any, res: Response<GenericServiceRes
 
     getGenericResponseHelper(productColors, resourceName, res)
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`))
+    return res.status(500).json(status500InternalServerError(`${error}`))
   }
 }
 
@@ -32,15 +32,15 @@ export async function postProductColor(req: any, res: Response<GenericServiceRes
   const {product_color_name} = req.body
 
   if(!product_color_name || typeof product_color_name != "string"){
-    res.status(400).json(status400BadRequest("Invalid product of product_color_name field"))
+    return res.status(400).json(status400BadRequest("Invalid product of product_color_name field"))
   }else{
     try {
       const newProductColor = await productColorModel.create({
         product_color_name
       })
-      res.status(201).json(status201Created(newProductColor, "product_color"))
+      return res.status(201).json(status201Created(newProductColor, "product_color"))
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`))
+      return res.status(500).json(status500InternalServerError(`${error}`))
     }
   }
 }

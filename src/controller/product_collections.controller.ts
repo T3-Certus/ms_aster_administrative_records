@@ -27,7 +27,7 @@ export async function getProductCollections(
 
     getGenericResponseHelper(productCollections, resourceName, res)
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -38,7 +38,7 @@ export async function postProductCollection(
   const { product_collection_name } = req.body;
 
   if (!product_collection_name || typeof product_collection_name != "string") {
-    res
+    return res
       .status(400)
       .json(
         status400BadRequest("Invalid value of product_collection_name field")
@@ -48,11 +48,11 @@ export async function postProductCollection(
       const newProductCollection = await productCollectionModel.create({
         product_collection_name,
       });
-      res
+      return res
         .status(201)
         .json(status201Created(newProductCollection, "product_collection"));
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`));
+      return res.status(500).json(status500InternalServerError(`${error}`));
     }
   }
 }

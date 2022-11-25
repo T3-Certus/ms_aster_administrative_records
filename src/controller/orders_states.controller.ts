@@ -27,7 +27,7 @@ export async function getOrderStates(
     });
     getGenericResponseHelper(orderStatesData, resourceName, res);
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -38,7 +38,7 @@ export async function postOrderState(
   const { order_state } = req.body;
 
   if (!order_state || typeof order_state != "string") {
-    res
+    return res
       .status(400)
       .json(status400BadRequest("Invalid value of order_state field"));
   } else {
@@ -46,9 +46,9 @@ export async function postOrderState(
       const newOrderState = await model.create({
         order_state,
       });
-      res.status(201).json(status201Created(newOrderState, resourceName));
+      return res.status(201).json(status201Created(newOrderState, resourceName));
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`));
+      return res.status(500).json(status500InternalServerError(`${error}`));
     }
   }
 }

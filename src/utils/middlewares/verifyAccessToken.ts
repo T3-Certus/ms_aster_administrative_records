@@ -20,11 +20,11 @@ export async function verifyAccessToken(req:any, res: Response<GenericServiceRes
     if(decodedToken.rol == "admin" || decodedToken.rol == "superadmin"){
       return next()
     }
-    res.status(403).json(status403Forbidden("Insufficient permissions"))
+    return res.status(403).json(status403Forbidden("Insufficient permissions"))
 
   } catch (error) {
     console.log(error)
-    res.status(401).json(status401Unauthorized("Invalid access token", `${error}`))
+    return res.status(401).json(status401Unauthorized("Invalid access token", `${error}`))
     
   }
 

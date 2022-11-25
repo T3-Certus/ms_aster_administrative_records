@@ -28,7 +28,7 @@ export async function getUserAddresses(
     });
     getGenericResponseHelper(userAddresses, resourceName, res)
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`))
+    return res.status(500).json(status500InternalServerError(`${error}`))
   }
 }
 

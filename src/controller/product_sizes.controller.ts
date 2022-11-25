@@ -27,7 +27,7 @@ export async function getProductSizes(
 
     getGenericResponseHelper(productSizes, resourceName, res)
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -38,7 +38,7 @@ export async function postProductSize(
   const { product_size_name } = req.body;
 
   if (!product_size_name || typeof product_size_name != "string") {
-    res
+    return res
       .status(400)
       .json(
         status400BadRequest("Invalid value of product_size_name field")
@@ -48,11 +48,11 @@ export async function postProductSize(
       const newProductSeason = await productSizeModel.create({
         product_size_name,
       });
-      res
+      return res
         .status(201)
         .json(status201Created(newProductSeason, "product_size"));
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`));
+      return res.status(500).json(status500InternalServerError(`${error}`));
     }
   }
 }

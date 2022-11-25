@@ -8,6 +8,7 @@ export * from './product_materials.model';
 export * from './product_seasons.model';
 export * from './product_sizes.model';
 export * from './user_addresses.model';
+export { default as user_cart_model } from './user_cart.model';
 export * from './user_carts.model';
 export * from './user_data.model';
 export * from './user_orders.model';

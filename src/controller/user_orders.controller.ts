@@ -36,6 +36,6 @@ export async function getUserOrders(
     });
     getGenericResponseHelper(userOrders, resourceName, res);
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }

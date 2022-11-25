@@ -28,7 +28,7 @@ export async function getUserRoles(
 
     getGenericResponseHelper(userRoles, resourceName, res);
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -39,15 +39,15 @@ export async function postUserRole(
   const { user_rol_name } = req.body;
 
   if (!user_rol_name || typeof user_rol_name != "string") {
-    res
+    return res
       .status(400)
       .json(status400BadRequest("Invalid value of user_rol_name field"));
   } else {
     try {
       const newUserRole = await model.create({ user_rol_name });
-      res.status(201).json(status201Created(newUserRole, resourceName));
+      return res.status(201).json(status201Created(newUserRole, resourceName));
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`));
+      return res.status(500).json(status500InternalServerError(`${error}`));
     }
   }
 }
@@ -60,7 +60,7 @@ export async function putUserRole(
   const { id } = req.params;
 
   if (!user_rol_name || typeof user_rol_name != "string") {
-    res
+    return res
       .status(400)
       .json(status400BadRequest("Invalid value of user_rol_name field"));
   } else {
@@ -69,11 +69,11 @@ export async function putUserRole(
         { user_rol_name },
         { where: { id_user_rol: id } }
       );
-      res
+      return res
         .status(200)
         .json(status200Ok(updatedUserRoles, resourceName, "", true));
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`));
+      return res.status(500).json(status500InternalServerError(`${error}`));
     }
   }
 }

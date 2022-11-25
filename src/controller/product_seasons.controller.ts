@@ -27,7 +27,7 @@ export async function getProductSeasons(
 
     getGenericResponseHelper(productSeasons, resourceName, res)
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -38,7 +38,7 @@ export async function postProductSeason(
   const { product_season_name } = req.body;
 
   if (!product_season_name || typeof product_season_name != "string") {
-    res
+    return res
       .status(400)
       .json(
         status400BadRequest("Invalid value of product_season_name field")
@@ -48,11 +48,11 @@ export async function postProductSeason(
       const newProductSeason = await productSeasonModel.create({
         product_season_name,
       });
-      res
+      return res
         .status(201)
         .json(status201Created(newProductSeason, "product_season"));
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`));
+      return res.status(500).json(status500InternalServerError(`${error}`));
     }
   }
 }

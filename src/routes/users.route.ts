@@ -10,7 +10,6 @@ router.get('/data', getUserData)
 router.put('/data/:userId', putUserData)
 router.delete('/data/:userId', deleteUserData)
 
-router.get('/carts', getUserCarts)
 router.get('/carts/:id', getUserCarts)
 
 router.get('/addresses', getUserAddresses)

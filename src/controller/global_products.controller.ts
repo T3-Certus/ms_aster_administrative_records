@@ -108,7 +108,7 @@ export async function getGlobalProducts(
 
     getGenericResponseHelper(globalProductsData, resourceName, res)
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -134,9 +134,9 @@ export async function postGlobalProduct(
       product_url_code,
       product_name,
     });
-    res.status(201).json(status201Created(newGlobalProduct, resourceName));
+    return res.status(201).json(status201Created(newGlobalProduct, resourceName));
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -154,7 +154,6 @@ export async function putGlobalProduct(
   } = req.body;
 
   const { id } = req.params;
-  console.log(id);
 
   try {
     const editedGlobalProduct = await GlobalProductModel.update(
@@ -169,11 +168,11 @@ export async function putGlobalProduct(
       { where: { id_global_product: id } }
     );
 
-    res
+    return res
       .status(200)
       .json(status200Ok(editedGlobalProduct, resourceName, "", true));
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -186,9 +185,9 @@ export async function deleteGlobalProduct(
   try {
     const deleteProduct = await globalProductModel.destroy({where: {id_global_product: globalProductId}})
 
-    res.status(200).json(status200Ok(deleteProduct, "global_products", "", false, true))
+    return res.status(200).json(status200Ok(deleteProduct, "global_products", "", false, true))
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`))
+    return res.status(500).json(status500InternalServerError(`${error}`))
   }
 
 }

@@ -52,7 +52,7 @@ export async function getUserData(
 
     getGenericResponseHelper(userData, resourceName, res);
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -86,9 +86,9 @@ export async function putUserData(
       { where: { id_user: userId } }
     );
 
-    res.status(200).json(status200Ok(editedUserData, "user_data", "", true));
+    return res.status(200).json(status200Ok(editedUserData, "user_data", "", true));
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -101,9 +101,9 @@ export async function deleteUserData(
   try {
     const deleteUser = await model.destroy({where: {id_user: userId}})
 
-    res.status(200).json(status200Ok(deleteUser, "user_data", "", false, true))
+    return res.status(200).json(status200Ok(deleteUser, "user_data", "", false, true))
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`))
+    return res.status(500).json(status500InternalServerError(`${error}`))
   }
 
 }

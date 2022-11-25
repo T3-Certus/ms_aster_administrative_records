@@ -5,7 +5,7 @@ import { status200Ok, status404NotFound } from "./httpResponses";
 export function getGenericResponseHelper(payload: any, resourceName: string, res: Response<GenericServiceResponse | GenericServiceErrorResponse>){
   if (payload) {
     if (payload.length === 0) {
-      res
+      return res
         .status(202)
         .json(
           status200Ok(
@@ -15,12 +15,12 @@ export function getGenericResponseHelper(payload: any, resourceName: string, res
           )
         );
     } else {
-      res
+      return res
         .status(200)
         .json(status200Ok(payload, resourceName));
     }
   } else {
-    res.status(404).json(status404NotFound(resourceName));
+    return res.status(404).json(status404NotFound(resourceName));
   }
 
 }

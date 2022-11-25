@@ -27,7 +27,7 @@ export async function getProductMaterials(
 
     getGenericResponseHelper(productMaterials, resourceName, res)
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -38,7 +38,7 @@ export async function postProductMaterial(
   const { product_material_name } = req.body;
 
   if (!product_material_name || typeof product_material_name != "string") {
-    res
+    return res
       .status(400)
       .json(
         status400BadRequest("Invalid value of product_material_name field")
@@ -48,11 +48,11 @@ export async function postProductMaterial(
       const newProductMaterial = await productMaterialModel.create({
         product_material_name,
       });
-      res
+      return res
         .status(201)
         .json(status201Created(newProductMaterial, "product_material"));
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`));
+      return res.status(500).json(status500InternalServerError(`${error}`));
     }
   }
 }

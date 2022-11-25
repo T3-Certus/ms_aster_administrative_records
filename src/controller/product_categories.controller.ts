@@ -27,7 +27,7 @@ export async function getProductCategories(
     
     getGenericResponseHelper(productCategories, resourceName, res)
   } catch (error) {
-    res.status(500).json(status500InternalServerError(`${error}`));
+    return res.status(500).json(status500InternalServerError(`${error}`));
   }
 }
 
@@ -38,7 +38,7 @@ export async function postProductCategory(
   const { product_category_name } = req.body;
 
   if (!product_category_name || typeof product_category_name != "string") {
-    res
+    return res
       .status(400)
       .json(
         status400BadRequest("Invalid value of product_category_name field")
@@ -48,11 +48,11 @@ export async function postProductCategory(
       const newProductCategory = await productCategoryModel.create({
         product_category_name,
       });
-      res
+      return res
         .status(201)
         .json(status201Created(newProductCategory, "product_category"));
     } catch (error) {
-      res.status(500).json(status500InternalServerError(`${error}`));
+      return res.status(500).json(status500InternalServerError(`${error}`));
     }
   }
 }
