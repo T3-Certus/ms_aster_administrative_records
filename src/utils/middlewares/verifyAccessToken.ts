@@ -9,7 +9,7 @@ export async function verifyAccessToken(req:any, res: Response<GenericServiceRes
   // console.log(req.headers)
   const accessToken: string = req.headers.authorization
   if(!accessToken){
-    res.status(403).json(status401Unauthorized("An access token is required for authentication",))
+    return res.status(403).json(status401Unauthorized("An access token is required for authentication",))
   } 
   const cAccessToken = accessToken.replace("Bearer ", "")
   
