@@ -6,7 +6,7 @@ export const postGlobalProductValidator = [
   check('id_product_season').exists().notEmpty().isInt(),
   check('id_product_material').exists().notEmpty().isInt(),
   check('id_product_category').exists().notEmpty().isInt(),
-  check('product_url_code').exists().notEmpty().isString(),
+  // check('product_url_code').exists().notEmpty().isString(),
   check('product_name').exists().notEmpty().isString(),
 
   (req: any, res: any, next: any) => {

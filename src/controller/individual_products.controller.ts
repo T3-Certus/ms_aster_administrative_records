@@ -11,6 +11,7 @@ import {
   status500InternalServerError,
 } from "../utils/methods/httpResponses";
 import { Request, Response } from "express";
+import { nanoid } from "nanoid";
 import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
 import { ProductColorModel, ProductSizeModel } from "../model";
 
@@ -77,11 +78,12 @@ export async function postIndividualProduct(
     id_product_color,
     product_stock,
     product_price,
-    product_sku,
+    // product_sku,
     product_url_img,
     has_offer,
     percent_discount,
   } = req.body;
+  const product_sku = nanoid()
 
   try {
     const newIndividualProduct = await individualProductModel.create({
@@ -113,7 +115,7 @@ export async function putIndividualProduct(
     id_product_color,
     product_stock,
     product_price,
-    product_sku,
+    // product_sku,
     product_url_img,
     has_offer,
     percent_discount,
@@ -129,7 +131,7 @@ export async function putIndividualProduct(
         id_product_color,
         product_stock,
         product_price,
-        product_sku,
+        // product_sku,
         product_url_img,
         has_offer,
         percent_discount,

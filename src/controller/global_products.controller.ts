@@ -21,6 +21,7 @@ import {
 } from "../utils/methods/httpResponses";
 import { requestGetParamsValidator } from "../utils/methods";
 import { Request, Response } from "express";
+import { nanoid } from "nanoid";
 import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
 
 const globalProductModel = GlobalProductModel;
@@ -121,9 +122,10 @@ export async function postGlobalProduct(
     id_product_season,
     id_product_material,
     id_product_category,
-    product_url_code,
+    // product_url_code,
     product_name,
   } = req.body;
+  const product_url_code = nanoid()
 
   try {
     const newGlobalProduct = await globalProductModel.create({
@@ -149,7 +151,7 @@ export async function putGlobalProduct(
     id_product_season,
     id_product_material,
     id_product_category,
-    product_url_code,
+    // product_url_code,
     product_name,
   } = req.body;
 
@@ -162,7 +164,7 @@ export async function putGlobalProduct(
         id_product_season,
         id_product_material,
         id_product_category,
-        product_url_code,
+        // product_url_code,
         product_name,
       },
       { where: { id_global_product: id } }
