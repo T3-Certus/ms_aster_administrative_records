@@ -5,6 +5,7 @@ export * from './product_categories.model';
 export * from './product_collections.model';
 export * from './product_colors.model';
 export * from './product_materials.model';
+export { default as product_media_model } from './product_media.model';
 export * from './product_seasons.model';
 export * from './product_sizes.model';
 export * from './user_addresses.model';

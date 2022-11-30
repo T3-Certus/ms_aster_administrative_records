@@ -5,6 +5,7 @@ export * from './product_categories.controller';
 export * from './product_collections.controller';
 export * from './product_colors.controller';
 export * from './product_materials.controller';
+export * from './product_media.controller';
 export * from './product_seasons.controller';
 export * from './product_sizes.controller';
 export * from './user_addresses.controller';

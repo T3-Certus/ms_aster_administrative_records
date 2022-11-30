@@ -1,13 +1,16 @@
 import { Router } from "express";
 import {
+  createProductMedia,
   deleteGlobalProduct,
   deleteIndividualProduct,
+  deleteProductMedia,
   getGlobalProducts,
   getIndividualProducts,
   getProductCategories,
   getProductCollections,
   getProductColors,
   getProductMaterials,
+  getProductMedia,
   getProductSeasons,
   getProductSizes,
   postGlobalProduct,
@@ -20,9 +23,8 @@ import {
   postProductSize,
   putGlobalProduct,
   putIndividualProduct,
+  updateProductMedia,
 } from "../controller";
-import { verifyAccessToken } from "../utils/middlewares/verifyAccessToken";
-
 import { postGlobalProductValidator } from "../validators/global_products.validator";
 import { postIndividualProductValidator } from "../validators/individual_products.validator";
 
@@ -65,5 +67,11 @@ router.put(
   putIndividualProduct
 );
 router.delete("/individuals/:individualProductId", deleteIndividualProduct);
+
+router.get("/media/:categoryId", getProductMedia)
+router.get("/media/:categoryId/:productId", getProductMedia)
+router.post("/media/create", createProductMedia)
+router.put("/media/update/:productId", updateProductMedia)
+router.delete("/media/delete/:productId", deleteProductMedia)
 
 export default router;
