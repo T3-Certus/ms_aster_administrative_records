@@ -102,7 +102,7 @@ export async function deleteProductMedia(req: any, res: Response<GenericServiceR
     if(!deletedMedia){
       return res.status(404).json(status404NotFound(resourceName, "Resource not found"))
     }
-    return res.status(200).json(status200Ok(deletedMedia, resourceName))
+    return res.status(200).json(status200Ok(deletedMedia, resourceName, "", false, true))
   } catch (error) {
     return res.status(500).json(status500InternalServerError(`${error}`))
   }
