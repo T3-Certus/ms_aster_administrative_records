@@ -68,10 +68,10 @@ router.put(
 );
 router.delete("/individuals/:individualProductId", deleteIndividualProduct);
 
-router.get("/media/:categoryId", getProductMedia)
-router.get("/media/:categoryId/:productId", getProductMedia)
-router.post("/media/create", createProductMedia)
-router.put("/media/update/:productId", updateProductMedia)
-router.delete("/media/delete/:productId", deleteProductMedia)
+// router.get("/media/:categoryId", getProductMedia)
+// router.get("/media/:categoryId/:productId", getProductMedia)
+// router.post("/media/create", createProductMedia)
+// router.put("/media/update/:productId", updateProductMedia)
+// router.delete("/media/delete/:productId", deleteProductMedia)
 
 export default router;
