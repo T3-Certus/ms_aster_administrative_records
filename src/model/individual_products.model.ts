@@ -25,7 +25,7 @@ export const IndividualProductModel = sequelize.define(
       type: DataTypes.STRING
     },
     product_url_img: {
-      type: DataTypes.STRING
+      type: DataTypes.ARRAY(DataTypes.STRING)
     },
     has_offer: {
       type: DataTypes.BOOLEAN,
