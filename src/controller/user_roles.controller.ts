@@ -12,7 +12,8 @@ import {
 } from "../utils/methods/httpResponses";
 import { Request, Response } from "express";
 import { getGenericResponseHelper } from "../utils/methods/responseHelpers";
-
+import { Response2xxSuccessful, Response4xxClientError } from "restponses";
+import { StatusOptions } from "restponses/dist/utils/status_options";
 const model = UserRoleModel;
 
 const resourceName = "user_roles";
@@ -28,7 +29,8 @@ export async function getUserRoles(
 
     getGenericResponseHelper(userRoles, resourceName, res);
   } catch (error) {
-    return res.status(500).json(status500InternalServerError(`${error}`));
+    // return res.status(500).json(status500InternalServerError(`${error}`));
+    return Response4xxClientError(400, { errors: error },)
   }
 }
 

@@ -40,6 +40,7 @@
     "node-fetch": "3.3.0",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
+    "restponses": "^1.1.2",
     "sequelize": "^6.24.0"
   }
 }
